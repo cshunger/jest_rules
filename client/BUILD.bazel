@@ -1,0 +1,23 @@
+load(":jest.bzl", "jest_test")
+
+filegroup(
+    name = "source_files",
+    srcs = glob(["src/*.*"]),
+)
+
+filegroup(
+    name = "config_files",
+    srcs = glob(["config/*.*"]),
+)
+
+jest_test(
+    name = "test",
+    srcs = [
+        ":source_files",
+        ":config_files",
+    ],
+    jest_config = ":config/jest.config.js",
+    deps = [
+        "@npm//:node_modules",
+    ],
+)
